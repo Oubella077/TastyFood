@@ -9,7 +9,7 @@ import { Product } from '../Models/Product';
 export class ProductService {
 
 constructor(private http:HttpClient) { }
-  host =environment.host;
+  host ="http://localhost:3000"
 
   public getAllproducts():Observable <Product[]> { 
 
