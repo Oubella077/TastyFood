@@ -26,19 +26,19 @@ constructor(private http:HttpClient) { }
        }
 
 public delete(id:number):Observable<void>{
-        return this.http.delete<void>(environment.host+"/products/"+id);
+        return this.http.delete<void>(this.host+"/products/"+id);
      }
 
  public editproduct(product:Product,productId:number):Observable<Product> { 
-  return this.http.put<Product>(environment.host + "/products/"+ productId, product)
+  return this.http.put<Product>(this.host + "/products/"+ productId, product)
  }
 
  public getproduct(productId:number):Observable<Product>{ 
-  return this.http.get<Product>(environment.host + "/products/"+ productId)
+  return this.http.get<Product>(this.host + "/products/"+ productId)
  }
 
  public setfavorite(product:Product):Observable<Product>{
-  return this.http.put<Product>(environment.host+"/products/"+product.id,{...product,isFavorite:!product.isFavorite});
+  return this.http.put<Product>(this.host +"/products/"+product.id,{...product,isFavorite:!product.isFavorite});
 }
 }
 
