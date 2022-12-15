@@ -1,0 +1,40 @@
+
+.cover{
+    background-image:url("/assets/home.PNG");
+     height:300px;
+     width: 100%;
+     background-size: cover;
+     border-radius: 30px;
+     
+  }
+  .product .choise .btn{
+    background-color: rgb(248, 242, 242);
+    margin-left: 15px;
+  }
+  div > div.product >div> div > span:nth-child(n):hover{
+  
+    background-color: #f3c8d6;
+  }
+  body > app-root > app-all-products > div > div:nth-child(3) > div > div:nth-child(1) > div > div.card-body > div.w-100.d-flex.justify-content-between > span:focus{
+    color: #e71325;
+    background-color: rgb(233, 23, 23);
+  }
+  
+  body > app-root > app-all-products > div > div:nth-child(3) > div > div:nth-child(1) > div > div.card-body > div.w-100.d-flex.justify-content-between > span:hover{
+    color: #e71325;
+    background-color: rgb(233, 23, 23);
+    
+  }
+
+  .heart-container :focus{
+    background-color: #e71325;
+  }
+  #began{
+    width:100%;
+    padding: 5px;
+    background: rgb(18, 18, 19);
+   }
+   .row .col-lg-5 input{
+     width: 150px;
+     height: 35px;
+   }
