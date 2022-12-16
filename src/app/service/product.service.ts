@@ -9,8 +9,8 @@ import { Product } from '../Models/Product';
 export class ProductService {
 
 constructor(private http:HttpClient) { }
-  host ="http://localhost:3000"
-
+  host =environment.host;
+  
   public getAllproducts():Observable <Product[]> { 
 
     return this.http.get<Product[]>(this.host +'/products' )
@@ -26,11 +26,11 @@ constructor(private http:HttpClient) { }
        }
 
 public delete(id:number):Observable<void>{
-        return this.http.delete<void>(this.host+"/products/"+id);
+        return this.http.delete<void>(this.host +"/products/"+id);
      }
 
  public editproduct(product:Product,productId:number):Observable<Product> { 
-  return this.http.put<Product>(this.host + "/products/"+ productId, product)
+  return this.http.put<Product>(this.host  + "/products/"+ productId, product)
  }
 
  public getproduct(productId:number):Observable<Product>{ 

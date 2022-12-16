@@ -24,7 +24,7 @@
       "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjHm18IGPgsY84_ob-qzQ7Z3OcCZOmtBoUKA&usqp=CAUs",
       "description": "tools Amizinz",
       "prix": "5",
-      "isFavorite": true,
+      "isFavorite": false,
       "ispromotion": false
     },
     {
@@ -105,7 +105,7 @@
       "photo": "",
       "description": "lorenmmm",
       "prix": 1,
-      "isFavorite": true,
+      "isFavorite": false,
       "ispromotion": false
     }
   ]
