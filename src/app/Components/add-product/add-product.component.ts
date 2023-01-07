@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import { Product } from 'src/app/Models/Product';
 import { ProductService } from 'src/app/service/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Byte } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -35,6 +36,14 @@ public  Addproduct(){
       this.route.navigate(['/product']).then();
      }
     )
+  }
+ encodeImageFileAsURL(element:any) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      console.log('RESULT', reader.result)
+    }
+    reader.readAsDataURL(file);
   }
 
   // save() {

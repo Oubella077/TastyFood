@@ -3,3 +3,13 @@
   to = "/index.html"
   status = 200
 
+[[build]]
+ publish = "dist/anglify"
+ comand  = "ng build --prod"
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "*"
+    Access-Control-Allow-Headers = "*"

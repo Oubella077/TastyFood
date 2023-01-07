@@ -1,46 +1,52 @@
-
-  <!-- Carousel -->
+<!-- Carousel -->
 <!-- <div id="demo" class="carousel slide" data-bs-ride="carousel" style="position:relative;"> -->
 
-  <!-- Indicators/dots -->
-  <section class="leanding">
-    <span src="" alt="Los Angeles" class="d-block" style="background-image:url(/assets/home2.jpg );
+<!-- Indicators/dots -->
+<section class="leanding">
+  <span src="" alt="Los Angeles" class="d-block" style="background-image:url(/assets/home2.jpg );
     
     height:550px;
     width: 100%;
     background-size: cover; 
     border-radius: 0 0 15px 500px;
     background-position: top -80px center;"></span>
-  
-  
-  <div class="featur  " style="position:absolute;margin:auto;">
+
+
+  <div id="featurr" class="featur  " style="position:absolute;margin:auto;z-index:1;">
     <div class="first" style="display:flex; width: 100%;">
-      <div class="pt-5"><h1 style="color: darkgoldenrod; width: max-content;">Craving Something</h1>
-      <p class="text-white pt-5">let's get you start !</p>
-    <button class="btn btn-light">Order Now ! </button>
-    </div>
-      
+      <div class="pt-5">
+        <h1 style="color: darkgoldenrod; width: max-content;">Craving Something</h1>
+        <p class="text-white pt-5">let's get you start !</p>
+        <span class="box-1 ">
+          <div class="btn btn-one ">
+            <span class="text-center">Order Now</span>
+          </div>
+        </span>
+        <!-- <button class="btn btn-light fw-bold">Order Now <i class="fa-solid fa-arrow-right-long "></i> </button> -->
+      </div>
+
       <div class="illust">
-        <img class="img-fluid" src="/assets/home1.png" style="width:500px; height: 450px; " alt=""></div>
+        <img class="img-fluid " src="/assets/home1.png" style="width:500px; height: 450px; " alt="WLC">
+      </div>
     </div>
-   
- </div>
+
+  </div>
 </section>
- <!-- fin -->
-  <!-- </div> -->
+<!-- fin -->
+<!-- </div> -->
 <!-- services -->
 <section id="services" class="container py-5">
   <div class="row">
     <h2 class="section-heading py-4">Our Services</h2>
     <i class="fa-duotone fa-burger-soda"></i>
-    
+
   </div>
+  <!-- services -->
   <div class="row">
-    
     <div class="column">
-      <div class="card">
+      <div data-bs-toggle="animation" data-bs-animation-start="onScroll" data-bs-animation-on-scroll="repeat" data-bs-animation="slide-right" class="card">
         <div class="icon-wrapper">
-          <i class="fa fa-mug-saucer"></i>
+          <i class="fa fa-mug-saucer animated flash infinite"></i>
         </div>
         <h3>breakfast Service </h3>
         <p>
@@ -50,7 +56,7 @@
       </div>
     </div>
     <div class="column">
-      <div class="card">
+      <div class="card" data-toggle="animation" data-animation-start="onScroll" data-animation-reset="true" data-animation="slide-in-up">
         <div class="icon-wrapper">
           <i class="fa-solid fa-utensils"></i>
         </div>
@@ -73,95 +79,186 @@
         </p>
       </div>
     </div>
-    
+
   </div>
 </section>
+<!-- Quote -->
+<section class="py-5 my-0 bg-white">
+<p class="fw-bold container fs-5 text-center text-muted text-dark">"I love food and I love everything involved with food.<br>
+                                    I love the fun of it. <br>
+                                    I love restaurants. <br>
+                                    I love cooking, although I don't cook very much.<br>
+                                    I love kitchens."
+ </p>
+</section>
 
+<!-- validation form -->
+
+<form class="row g-3 needs-validation" novalidate>
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">First name</label>
+    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustomUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="inputGroupPrepend">@</span>
+      <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label for="validationCustom03" class="form-label">City</label>
+    <input type="text" class="form-control" id="validationCustom03" required>
+    <div class="invalid-feedback">
+      Please provide a valid city.
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="validationCustom04" class="form-label">State</label>
+    <select class="form-select" id="validationCustom04" required>
+      <option selected disabled value="">Choose...</option>
+      <option>...</option>
+    </select>
+    <div class="invalid-feedback">
+      Please select a valid state.
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="validationCustom05" class="form-label">Zip</label>
+    <input type="text" class="form-control" id="validationCustom05" required>
+    <div class="invalid-feedback">
+      Please provide a valid zip.
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+      <label class="form-check-label" for="invalidCheck">
+        Agree to terms and conditions
+      </label>
+      <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
 
 <!-- Footer -->
 <footer id="footer" class="bg-dark text-center text-white ">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Facebook.com" role="button"
-          ><i class="fab fa-facebook-f"></i></a>
-  
-        <!-- Twitter -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Twitter.com" role="button"
-          ><i class="fab fa-twitter"></i
-        ></a>
-  
-        <!-- Google -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.google.com" role="button"
-          ><i class="fab fa-google"></i
-        ></a>
-  
-        <!-- Instagram -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Instagram.com" role="button"
-          ><i class="fab fa-instagram"></i
-        ></a>
-  
-        <!-- Linkedin -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Linkedin.com" role="button"
-          ><i class="fab fa-linkedin-in"></i
-        ></a>
-  
-        <!-- Github -->
-        <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.github.com" role="button"
-          ><i class="fab fa-github"></i
-        ></a>
-      </section>
-      <!-- Section: Social media -->
-  
-      <!-- Section: Form -->
-      <section class="">
-        <form action="">
-          <!--Grid row-->
-          <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-auto">
-              <p class="pt-2 text-white">
-                <strong>Sign up for our newsletter</strong>
-              </p>
-            </div>
-            <div class="col-md-5 col-12">
-              <!-- Email input -->
-              <form>
-                <input  type="email" id="form5Example24" class="form-control mb-4" />
-                <label class="form-label" for="form5Example24">Email address</label>
-              </form>
-            </div>
-            <!--Grid column-->
-            <div class="col-auto">
-              <!-- Submit button -->
-              <button mdbRipple type="submit" class="btn btn-outline-light mb-4">
-                Subscribe
-              </button>
-            </div>
-            <!--Grid column-->
+  <!-- Grid container -->
+  <div class="container pb-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Facebook.com" role="button"><i
+          class="fab fa-facebook-f"></i></a>
+
+      <!-- Twitter -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Twitter.com" role="button"><i
+          class="fab fa-twitter"></i></a>
+
+      <!-- Google -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.google.com" role="button"><i
+          class="fab fa-google"></i></a>
+
+      <!-- Instagram -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Instagram.com" role="button"><i
+          class="fab fa-instagram"></i></a>
+
+      <!-- Linkedin -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.Linkedin.com" role="button"><i
+          class="fab fa-linkedin-in"></i></a>
+
+      <!-- Github -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="https://www.github.com" role="button"><i
+          class="fab fa-github"></i></a>
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Form -->
+    <section class="">
+      <form action="">
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2 text-white">
+              <strong>Sign up for our newsletter</strong>
+            </p>
           </div>
-          <!--Grid row-->
-        </form>
-      </section>
-      <!-- Section: Form -->
-      <!-- Section: Text -->
-      <section class="mb-4">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
-          repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
-          eum harum corrupti dicta, aliquam sequi voluptate quas.
-        </p>
-      </section>
-      <!-- Section: Text -->  
-      <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" >Email : TastyFood@gmail.com</a>
-    </div>
-  </footer>
-  <!-- Footer -->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <form>
+              <input type="email" id="form5Example24" class="form-control mb-4" />
+              <label class="form-label" for="form5Example24">Email address</label>
+            </form>
+          </div>
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button mdbRipple type="submit" class="btn btn-outline-light mb-4">
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+    <!-- Section: Text -->
+    <section class="mb-4">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+        repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+        eum harum corrupti dicta, aliquam sequi voluptate quas.
+      </p>
+    </section>
+    <!-- Section: Text -->
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-white">Email : TastyFood@gmail.com</a>
+  </div>
+</footer>
+<!-- Footer -->
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      }) })()
+</script>

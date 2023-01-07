@@ -11,15 +11,19 @@ import { ProductService } from 'src/app/service/product.service';
 export class AllProductsComponent implements OnInit {
   public products:Product[]=[];
   public product:Product[]=[];
+  public cartproducts:Product[]=[];
   public p:Product={ } as Product;
   searchTerm = '';
   errormessage: any;
+  page : any= 1;
+  count: any= 6;
+  total:any =15;
   constructor(private service :ProductService) { }
 
   ngOnInit(): void {
     this.getproducts();
   }
-
+ 
 getproducts() { 
   this.service.getAllproducts().subscribe( {
 
@@ -35,8 +39,6 @@ getproducts() {
   public search(Keyword : string  ){ 
         this.products=this.product.filter( (val:any)=>val.name.toLowerCase().includes(Keyword) )
       }
-
-
   public DeleteProduct(p:Product){
 
         let conf=confirm("Are you sure");
@@ -46,8 +48,9 @@ getproducts() {
           //this.handlegetAllproducts();
           let index=this.products.indexOf(p);
           this.products.splice(index,1);
+          this.total--;
         }})
-      }
+      }    
 public get(i:number){
   if(i)
   this.service.getproduct(i).subscribe({
@@ -55,8 +58,6 @@ public get(i:number){
      
    error: (err: any)=> {console.error(err)}
   } )}
-
-
 public favorit(p:Product){
   let promo=p.isFavorite;
   this.service.setfavorite(p).subscribe( { 
@@ -67,5 +68,26 @@ public favorit(p:Product){
    }  
   )
 }
+add(product:Product){
+  if("cart" in localStorage){
+   this.cartproducts=JSON.parse(localStorage.getItem("cart")!);
+   let exist =this.cartproducts.find(item=>item.id==product.id)
+   if(exist)
+     alert("This product exist Already in your cart")
+   else{ 
+     this.cartproducts.push(product);
+     localStorage.setItem("cart",JSON.stringify(this.cartproducts));
+   }
+ }
+ else{
+   this.cartproducts.push(product);
+   localStorage.setItem("cart",JSON.stringify(this.cartproducts));
+ }
+ }
 
-  }
+ onpageChange(event: any) {
+  this.page = event;
+  
+}
+
+}

@@ -1,92 +1,129 @@
-
 <div class="container">
-   <div class="cover">
-    
-   </div>
-
-<div class="product">
-<h4 class="py-3">Recomended For You</h4>
-<div class=" d-flex justify-content-between">
-    <div class="choise">
-<span class="btn btn-sm">ALL</span>
-<span class="btn btn-sm">Promotion</span>
-<span class="btn btn-sm">Top Rate</span>
-<span class="btn btn-sm">Best Seller</span>
-</div>
-
-<form class="d-flex " (ngSubmit)="search(searchTerm)" style="height: 40px; ">
-    <input class="form-control small " name="searchTerm" [(ngModel)]="searchTerm"  type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-secondary " type="submit"><i class="fa fa-search"></i></button>
-  </form>
-</div>
-
+  <div class="cover">
   </div>
 
-<!-- add product button -->
-<span type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal-dialog" data-bs-target="#staticBackdrop">
-    <span class="my-3"><i class="fa-regular fa-plus" routerLink="/add-product"> Add Product</i></span>
-</span>
-
-<div *ngIf="products">
-    <div class="row mt-3 mb-5"> 
-<div  class="col-lg-3 col-md-6  col-sm-12 mt-3" *ngFor="let item of products; let i=index">
-                    <!-- <span class="float-end price-hp">{{item.prix}}</span> -->
-        <div class="card h-60 shadow-sm position-relative" >     
-         <div class="dropdown position-absolute top-0 end-0" style="cursor: pointer; ">
-           <button class="btn btn-outline-secondary btn-sm " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            
-            <i class="fa-sharp fa-solid fa-ellipsis-vertical fs-5" ></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li class="dropdown-item"><i class="fa fa-pen" routerLink="/product/edit/{{item.id}}">    Edite </i></li>
-                      <li class="dropdown-item fa fa-trash" (click)="DeleteProduct(item)">   Delete</li>        
-                    </ul>
-                  </div>
-
-        <img src="{{item.photo}}" class="card-img-top" style="height: 250px; " alt="..."> 
-        <div class="label-top shadow-sm fs-5 fw-3 mx-auto">{{item.name}}</div> 
-        <div class="card-body"> 
-            <div class="w-100 d-flex justify-content-between">
-            <span>Price : {{item.prix | currency}} </span>
-            <span (click)="favorit(item)">          
-            <i *ngIf="!item.isFavorite" class="fa-regular fa-heart" style="font-size:22px;"></i>
-            <i *ngIf="item.isFavorite" class="fa fa-heart" style="font-size:22px;color:red"></i>
-            </span> 
-            
-        </div>
-            <div class="clearfix mb-3"> 
-                <!-- <span class="float-start badge rounded-pill bg-success">{{item.prix}}</span>  -->
-                <span ><a href="#" class="small text-muted">Reviews</a></span> </div> 
-                <h5 class="card-title"></h5>
-                 <div class="text-center my-2">
-                  <button type="button" (click)="get(item.id)" class="btn btn-warning" data-toggle="modal" data-target="#exampleModall">
-                   Check offer
-                  </button> 
-                  <!-- Modal example -->
-
-<div class="modal modal-xl" id="exampleModall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabell" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabell">Product Information</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-        </button>
+  <div class="product">
+    <h4 class="py-3">Recomended For You</h4>
+    <div class=" d-flex justify-content-between">
+      <div class="choise">
+        <span class="btn btn-sm">ALL</span>
+        <span class="btn btn-sm">Promotion</span>
+        <span class="btn btn-sm">Top Rate</span>
+        <span class="btn btn-sm">Best Seller</span>
       </div>
-   <div class="modal-body" >
-      <app-view [data]="p" > </app-view>
+
+      <form class="d-flex " (ngSubmit)="search(searchTerm)" style="height: 40px; ">
+        <input class="form-control small " name="searchTerm" [(ngModel)]="searchTerm" type="search" placeholder="Search"
+          aria-label="Search">
+        <button class="btn btn-outline-secondary " type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
   </div>
-  <!-- end offer chec -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Order Now!</button>
+  <!-- add product button -->
+  <span type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal-dialog"
+    data-bs-target="#staticBackdrop">
+    <span class="my-3"><i class="fa-regular fa-plus" (click)="total=total+1" routerLink="/add-product"> Add Product</i></span>
+  </span>
+  <div *ngIf="products">
+    <div class="row mt-3 mb-3">
+      <div class="col-lg-3 col-md-6  col-sm-12 mt-3 " *ngFor="let item of products | paginate: {
+       
+      itemsPerPage: count,
+      currentPage: page,
+      totalItems: total }; let i=index">
+        <!-- <span class="float-end price-hp">{{item.prix}}</span> -->
+        <div class="card h-60 shadow-sm position-relative">
+          <div class="dropdown position-absolute top-0 end-0" style="cursor:pointer;">
+            <button class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+              <i class="fa-sharp fa-solid fa-ellipsis-vertical fs-5"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item"><i class="fa fa-pen" routerLink="/product/edit/{{item.id}}"> Edite </i></li>
+              <li class="dropdown-item fa fa-trash" (click)="DeleteProduct(item)"> Delete</li>
+            </ul>
+          </div>
+          <span (click)="get(item.id)" data-toggle="modal" data-target="#exampleModall">
+            <img src="{{item.photo}}" class="card-img-top  " style="height: 250px; cursor: pointer;"
+              alt="{{item.name}}"></span>
+          <div class="label-top shadow-sm fs-5 fw-3 mx-auto">{{item.name}}</div>
+          <div class="card-body">
+            <div class="w-100 d-flex justify-content-between">
+              <span>Price : {{item.prix | currency}}
+                <span *ngIf="item.ispromotion" class="small text-muted "><i class="small fa-solid fa-rectangle-ad"></i>
+                </span>
+              </span>
+              <span (click)="favorit(item)">
+                <i *ngIf="!item.isFavorite" class="fa-regular fa-heart" style="font-size:22px;"></i>
+                <i *ngIf="item.isFavorite" class="fa fa-heart" style="font-size:22px;color:red"></i>
+              </span>
+            </div>
+            <div class="">
+              <!-- <span class="float-start badge rounded-pill bg-success">{{item.prix}}</span>  -->
+              <!-- <span *ngIf="item.ispromotion" class="small text-muted " ><i class="small fa-solid fa-rectangle-ad"></i>  </span> -->
+            </div>
+            <h5 class="card-title"></h5>
+            <div class="text-center my-2">
+              <button type="button" (click)="get(item.id)" class="btn btn-sm btn-warning" data-toggle="modal"
+                data-target="#exampleModall"> Check offer </button>
+              <!-- Modal example -->
+              <div class="modal modal-xl" id="exampleModall" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabell" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabell"><strong>Product Information</strong></h5>
+                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <app-view [data]="p"> </app-view>
+                    </div>
+                    <!-- end offer chec -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Order Now !</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
+            </div>
+            <div class="clearfix mb-1">
+              <span class="float-start"><i class="far fa-question-circle"></i></span>
+              <span class="float-end"><i class="fas fa-plus btn" (click)="add(item)"> </i></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- end Modal -->                 
-                    </div>
-                  <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i></span> 
-                    <span class="float-end"><i class="fas fa-plus"></i></span> </div> </div> </div> 
-  </div> 
-</div>
-</div>
+  <!-- Product loading end -->
+  <!-- pagination -->
+  
+  <nav aria-label="Page navigation  " >
+    <ul class="pagination justify-content-center ">
+      <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+       (pageChange)="page = $event; onpageChange($event)">
+
+    </pagination-controls>
+      <!-- <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li> -->
+    </ul>
+  </nav>

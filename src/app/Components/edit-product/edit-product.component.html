@@ -34,8 +34,8 @@
                     </div>
                     <div class="row justify-content-between text-left">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"  id="isActive">
-                        <label class="form-check-label" for="isActive">Promoted</label>
+                        <input class="form-check-input" [checked]="product.ispromotion" (change)="product.ispromotion=!product.ispromotion" type="checkbox"   id="ispromotion">
+                        <label class="form-check-label" for="ispromotion">Promoted</label>
                     </div>
                     </div>
                     <div class="row justify-content-between text-left">

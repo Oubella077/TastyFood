@@ -98,9 +98,10 @@
             
             
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/bootstrap.bundle.js"
-            ]
+            "scripts":
+             [
+              "./node_modules/bootstrap/dist/bootstrap.bundle.js",
+              "./src/assets/app.js"]
           
           }
         }
