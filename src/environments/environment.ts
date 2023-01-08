@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  runtimeConfigUrl: './assets/config.json',
   host:"http://localhost:3000"
 
 };

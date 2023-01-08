@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  runtimeConfigUrl: './assets/config.prod.json'
+  host:"http://localhost:3000"
 };
