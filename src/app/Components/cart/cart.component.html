@@ -6,15 +6,14 @@
                     <div class="card-header py-3">
                         <h5 class="mb-0">Cart - {{cartproducts.length}} items</h5>
                     </div>
-                    <div class="card-body" *ngFor ="let item of cartproducts; let index=index">
+                    <div class="card-body" *ngFor="let item of cartproducts; let index=index">
                         <!-- Single item -->
                         <div class="row">
                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                 <!-- Image -->
                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                     data-bs-ripple-color="light">
-                                    <img src={{item.photo}}
-                                        class="w-100" alt="Blue Jeans Jacket" />
+                                    <img src={{item.product.imageURL}} class="w-100" alt="Blue Jeans Jacket" />
                                     <a href="#!">
                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                     </a>
@@ -24,11 +23,15 @@
                             <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                 <!-- Data -->
                                 <p><strong>{{item.name }} </strong></p>
-                                <p>Color: blue</p>
-                                <p>Size: M</p>
+                                  <!-- Price -->
+                                  <p class="text-start ">
+                                    <strong>{{item.price | currency}} </strong>
+                                </p>
+                                <!-- Price -->
+                               
                                 <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-bs-toggle="tooltip"
                                     title="Remove item">
-                                    <i class="fas fa-trash" (click)="delete(index)"></i>
+                                    <i class="fas fa-trash" (click)="Delete(item.id)"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm mb-2" data-bs-toggle="tooltip"
                                     title="Move to the wish list">
@@ -39,38 +42,34 @@
                             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                 <!-- Quantity -->
                                 <div class="d-flex mb-4" style="max-width: 300px">
-                                    <button class="btn btn-primary h-50 px-3 me-2"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                    <button class="btn btn-primary h-50 px-3 me-2 mt-4" (click)="minsquantity(index)">
                                         <i class="fas fa-minus"></i>
                                     </button>
-                                    <div class="form-outline">
-                                        <input id="form1" min="0"  (change)="calcule(index,$event)" name="quantity" value="1" type="number"
-                                            class="form-control" />
-                                        <label class="form-label" for="form1">Quantity</label>
-                                    </div>
-                                    <button class="btn btn-primary h-50 px-3 ms-2"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()" >
+
+                           <div class="form-outline">
+                             <label class="form-label ms-3" for="form1 ">  Quantity</label>
+                              <input id="form1" min="0" [(ngModel)]="item.quantity" (change)="detecteChange()"  name="quantity"
+                              type="number" class="form-control" />
+                              </div>
+
+                                    <button class="btn btn-primary h-50 px-3 ms-2 mt-4" (click)="addquantity(index)">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                                 <!-- Quantity -->
-                                <!-- Price -->
-                                <p class="text-start text-md-center">
-                                    <strong>{{item.prix | currency}} </strong>
-                                </p>
-                                <!-- Price -->
+                              
                             </div>
                         </div>
                         <!-- Single item -->
                         <hr class="my-4" />
                         <!-- Single item -->
-                       
                     </div>
                 </div>
                 <div class="card mb-4">
                     <div class="card-body">
                         <p><strong>Expected shipping delivery</strong></p>
                         <p class="mb-0">12.10.2020 - 14.10.2020</p>
+                        <p class="mb-0">{{ today | date }} </p> 
                     </div>
                 </div>
                 <div class="card mb-4 mb-lg-0">
@@ -100,8 +99,8 @@
                         <ul class="list-group list-group-flush">
                             <li
                                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                Products
-                                <span>$53.98</span>
+                                
+                                <span>{{Total | currency}}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                 Shipping
@@ -115,56 +114,72 @@
                                         <p class="mb-0">(including VAT)</p>
                                     </strong>
                                 </div>
-                                <span><strong>$53.98</strong></span>
+                                <span><strong>{{Total  | currency}}</strong></span>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-primary btn-sm launch" data-toggle="modal" data-target="#staticBackdrop"> <i
-                            class="fa fa-rocket"></i> Go to checkout
-                    </button>
-                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
-                                <div class="tabs mt-3">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation"> <a class="nav-link active" id="visa-tab"
-                                                data-toggle="tab" href="#visa" role="tab" aria-controls="visa" aria-selected="true">
-                                                <img src="https://i.imgur.com/sB4jftM.png" width="80"> </a> </li>
-                                        <li class="nav-item" role="presentation"> <a class="nav-link" id="paypal-tab" data-toggle="tab"
-                                                href="#paypal" role="tab" aria-controls="paypal" aria-selected="false"> <img
-                                                    src="https://i.imgur.com/yK7EDD1.png" width="80"> </a> </li>
-                                    </ul>
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
-                                            <div class="mt-4 mx-4">
-                                                <div class="text-center">
-                                                    <h5>Credit card</h5>
-                                                </div>
-                                                <div class="form mt-3">
-                                                    <div class="inputbox"> <input type="text" name="name" class="form-control"
-                                                            required="required"> <span>Cardholder Name</span> </div>
-                                                    <div class="inputbox"> <input type="text" name="name" min="1" max="999"
-                                                            class="form-control" required="required"> <span>Card Number</span> <i
-                                                            class="fa fa-eye"></i> </div>
-                                                    <div class="d-flex flex-row">
-                                                        <div class="inputbox"> <input type="text" name="name" min="1" max="999"
-                                                                class="form-control" required="required"> <span>Expiration Date</span>
-                                                        </div>
-                                                        <div class="inputbox"> <input type="text" name="name" min="1" max="999"
-                                                                class="form-control" required="required"> <span>CVV</span> </div>
-                                                    </div>
-                                                    <div class="px-5 pay"> <button class="btn btn-success btn-block">Add card</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <button type="button" class="btn btn-primary btn-sm launch" data-toggle="modal"
+                            data-target="#staticBackdrop"> <i class="fa fa-rocket"></i> Go to checkout
+                        </button>
+                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i>
                                         </div>
-                                        <div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
-                                            <div class="px-5 mt-5">
-                                                <div class="inputbox"> <input type="text" name="name" class="form-control"
-                                                        required="required"> <span>Paypal Email Address</span> </div>
-                                                <div class="pay px-5"> <button class="btn btn-primary btn-block">Add paypal</button>
+                                        <div class="tabs mt-3">
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation"> <a class="nav-link active"
+                                                        id="visa-tab" data-toggle="tab" href="#visa" role="tab"
+                                                        aria-controls="visa" aria-selected="true">
+                                                        <img src="https://i.imgur.com/sB4jftM.png" width="80"> </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation"> <a class="nav-link"
+                                                        id="paypal-tab" data-toggle="tab" href="#paypal" role="tab"
+                                                        aria-controls="paypal" aria-selected="false"> <img
+                                                            src="https://i.imgur.com/yK7EDD1.png" width="80"> </a> </li>
+                                            </ul>
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="visa" role="tabpanel"
+                                                    aria-labelledby="visa-tab">
+                                                    <div class="mt-4 mx-4">
+                                                        <div class="text-center">
+                                                            <h5>Credit card</h5>
+                                                        </div>
+                                                        <div class="form mt-3">
+                                                            <div class="inputbox"> <input type="text" name="name"
+                                                                    class="form-control" required="required">
+                                                                <span>Cardholder Name</span> </div>
+                                                            <div class="inputbox"> <input type="text" name="name"
+                                                                    min="1" max="999" class="form-control"
+                                                                    required="required"> <span>Card Number</span> <i
+                                                                    class="fa fa-eye"></i> </div>
+                                                            <div class="d-flex flex-row">
+                                                                <div class="inputbox"> <input type="text" name="name"
+                                                                        min="1" max="999" class="form-control"
+                                                                        required="required"> <span>Expiration
+                                                                        Date</span>
+                                                                </div>
+                                                                <div class="inputbox"> <input type="text" name="name"
+                                                                        min="1" max="999" class="form-control"
+                                                                        required="required"> <span>CVV</span> </div>
+                                                            </div>
+                                                            <div class="px-5 pay"> <button
+                                                                    class="btn btn-success btn-block">Add card</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="paypal" role="tabpanel"
+                                                    aria-labelledby="paypal-tab">
+                                                    <div class="px-5 mt-5">
+                                                        <div class="inputbox"> <input type="text" name="name"
+                                                                class="form-control" required="required"> <span>Paypal
+                                                                Email Address</span> </div>
+                                                        <div class="pay px-5"> <button
+                                                                class="btn btn-primary btn-block">Add paypal</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -172,8 +187,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>

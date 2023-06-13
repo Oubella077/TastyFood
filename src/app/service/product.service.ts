@@ -1,37 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Product } from '../Models/Product';
 import { user } from '../Models/user';
+import { KeycloakSecurityService } from './keycloak-security.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-constructor(private http:HttpClient) { }
+constructor(private http:HttpClient, private service:KeycloakSecurityService) { }
   host =environment.host;
   
   public getAllproducts():Observable <Product[]> { 
-
-    return this.http.get<Product[]>(this.host +'/products' )
+    return this.http.get<Product[]>(this.host+"/products/liste")
     }
-
-
  public searchproducts(Keyword : string  ):Observable <Product> { 
       return this.http.get <Product>(this.host +'/products?name_Like='+Keyword )
       }
 // add a product
  Createproduct(product:Product):Observable<Product>{ 
-        return this.http.post<Product>(this.host + "/products/" , product)
+        return this.http.post<Product>( this.host+"/products/create" , product)
        }
-//  delete
-public delete(id:number):Observable<void>{
-        return this.http.delete<void>(this.host +"/products/"+id);
+//  delete product
+public delete(id:number){
+        return this.http.delete<String>("http://localhost:8080/products/delete/"+id);
      }
-//  update
+//  update product
  public editproduct(product:Product,productId:number):Observable<Product> { 
-  return this.http.put<Product>(this.host  + "/products/"+ productId, product)
+  return this.http.put<Product>(this.host+"http://localhost:8080/products/update/"+ productId, product)
  }
 //  Get product
  public getproduct(productId:number):Observable<Product>{ 
@@ -43,8 +41,8 @@ public delete(id:number):Observable<void>{
 }
 // user services
 // Add User
-CreateUser(user:user):Observable<user>{ 
-  return this.http.post<user>(this.host + "/users/" ,user)
+public CreateUser():Observable<any>{ 
+  return this.http.get<String>(this.host + "/categorie/login")
  }
 
 public getusers():Observable<user[]>{

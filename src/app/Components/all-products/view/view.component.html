@@ -1,16 +1,38 @@
-<div class="row py-5 ms-5">
+<div class="container">
+  <div class="row py-5 ms-5">
     <div class="col-lg-4 mx-3">
-      <img id="began" src="{{data.photo}}" alt="" style="height: 300px; width:300px;">
+      <img id="began" src="{{p.imageURL}}" alt="" style="height: 300px; width:300px;">
     </div>
-    
+    {{p.id | json}}
     <div class="col-lg-5 pt-5">
-      <h2><strong>{{data.name}}</strong></h2>
-      <span > <strong>{{data.prix | currency}} </strong></span>
-    <input type="number" value="1"><br>
-    <button class="btn btn-success mt-3 " (click)="add2(data)">Add To Cart</button>
-    <div class="detail pt-5">
-      <h3>Description Product</h3>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo soluta quos voluptate provident expedita maxime voluptatum asperiores exercitationem. Repellendus repudiandae dignissimos in quasi eum accusamus tenetur velit recusandae dicta praesentium?</p>
-    </div>
+      <h2><strong>{{p.name}}</strong></h2>
+      <span> <strong>{{p.price| currency}} </strong></span>
+      <input type="number" value="1"><br>
+      <button class="btn btn-success mt-3 " (click)="addtocart(p,p.id)">Add To Cart</button>
+      <div class="detail pt-5">
+        <h3>Description Product</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Quo soluta quos voluptate provident expedita maxime voluptatum asperiores exercitationem. Repellendus
+          repudiandae dignissimos in quasi eum accusamus tenetur velit recusandae dicta praesentium?</p>
+      </div>
     </div>
   </div>
+</div>
+<!-- <div class="modal modal-xl" id="exampleModall" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabell" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabell"><strong>Product Information</strong></h5>
+                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <app-view > </app-view>
+                    </div>      
+                     <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->

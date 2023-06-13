@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -14,7 +14,12 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { HomeComponent } from './Components/home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { KeycloakSecurityService } from './service/keycloak-security.service';
 
+function kcFactory(KcSecurity: KeycloakSecurityService) {
+  return () =>
+  KcSecurity.init();
+}
 @NgModule({
   declarations: [
     AppComponent, HeaderComponent, AllProductsComponent, AddProductComponent, EditProductComponent, ViewComponent, LoginComponent,
@@ -23,7 +28,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HomeComponent,
   ],
   imports: [ BrowserModule,AppRoutingModule,FormsModule,ReactiveFormsModule,HttpClientModule,NgxPaginationModule  ],
-  providers: [],
+  providers: [ 
+    {
+    provide: APP_INITIALIZER,
+    deps: [KeycloakSecurityService],
+    useFactory: kcFactory,
+    multi: true
+  }
+],
   exports :[NgxPaginationModule] ,
   bootstrap: [AppComponent]
 })

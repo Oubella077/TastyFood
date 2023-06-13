@@ -1,9 +1,15 @@
 export interface Product{ 
     id:number;
     name:string;
-    photo:string;
-    description:string;
-    prix:number,
+    imageURL:string;
+    price:number;
+    description:string,
+    categoryId:number,
     isFavorite:boolean,
     ispromotion: boolean
  } 
+
+ export interface Cartproduct{ 
+    item:Product;
+    quantity : number;
+ }

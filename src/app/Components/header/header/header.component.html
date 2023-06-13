@@ -17,20 +17,54 @@
           <a class="nav-link fw-bold" aria-current="page" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="/product">Menu</a>
+          <a class="nav-link " aria-current="page" routerLink="/products">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="/home/#footer">Contact</a>
+          <a class="nav-link " aria-current="page" href="/home/footer">Contact</a>
         </li>
       </ul>
       <!-- Left links -->
       <div class="d-flex align-items-center">
-        <span ><i class="fa-solid fa-cart-shopping fs-4 btn me-2 " routerLink="/cart"></i></span>
-        <button type="button" class="btn btn-secondary btn-sm px-3 me-2" routerLink="/login">  Login  </button>
-        <button type="button" class="btn btn-primary btn-sm me-3" routerLink="/signup"> Sign up </button>
+        <span ><i *ngIf ="keycloakservice.Kc.authenticated" class="fa-solid fa-cart-shopping fs-4 btn me-2 " routerLink="/cart"></i></span>
+                           
+        <span  *ngIf="!keycloakservice.Kc.authenticated"  
+           data-toggle="modal" data-target="#Modal3"> </span>
+          <!-- Modal login -->
+          <div class="modal " id="Modal3" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabell" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabell"><strong>Information</strong></h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                  </button>                     
+                </div>     
+                <div class="modal-body">
+                  <p>Think To Logging Please!</p>
+                </div>  
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end Modal login -->
+
+        <span *ngIf ="keycloakservice.Kc.authenticated" class="dropdown">
+          {{keycloakservice.Kc.subject }}  
+          <button class="btn btn-light text-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{keycloakservice.Kc.tokenParsed?.preferred_username }}          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item btn" (click)="Onlogout()">Logout</a>
+            <a class="dropdown-item"  (click)="Setting()">Setting</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </span>
+        <span *ngIf ="!keycloakservice.Kc.authenticated">
+        <button type="button" class="btn btn-success btn-sm px-3 me-2"  (click)="Onlogin()">  Login  </button>
+        <button type="button" class="btn btn-secondary btn-sm me-3"  (click)="Signup()" > Sign up </button>
+      </span>
       </div>
     </div>
-    <!-- Collapsible wrapper -->
   </div>
-  <!-- Container wrapper -->
 </nav>

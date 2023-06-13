@@ -14,11 +14,12 @@ export class AddProductComponent implements OnInit {
  public product:Product={
    id: 0,
    name: '',
-   photo: '',
+   imageURL: '',
    description: '',
-   prix: 0,
+   price: 0,
    isFavorite: false,
-   ispromotion: false
+   ispromotion: false,
+   categoryId: 0
  };
  public productform!: FormGroup;
  

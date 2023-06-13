@@ -24,13 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
-             
+              "src/assets"  
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/keycloak-js/dist/keycloak.min.js"]
           },
           "configurations": {
             "production": {
@@ -100,8 +99,7 @@
             "scripts":
              [
               "./node_modules/bootstrap/dist/bootstrap.bundle.js",
-              "./src/assets/app.js"]
-          
+              "./src/assets/app.js"]    
           }
         }
       }

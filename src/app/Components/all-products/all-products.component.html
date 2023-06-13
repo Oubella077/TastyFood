@@ -20,36 +20,42 @@
     </div>
   </div>
   <!-- add product button -->
-  <span type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal-dialog"
+  <span type="button" *ngIf="!role &&  authenticate" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal-dialog"
     data-bs-target="#staticBackdrop">
-    <span class="my-3"><i class="fa-regular fa-plus" (click)="total=total+1" routerLink="/add-product"> Add Product</i></span>
+    <span class="my-3"><i class="fa-regular fa-plus" (click)="total=total+1" routerLink="/add-product"> Add
+        Product</i></span>
   </span>
   <div *ngIf="products">
     <div class="row mt-3 mb-3">
-      <div class="col-lg-3 col-md-6  col-sm-12 mt-3 " *ngFor="let item of products | paginate: {
-       
+      <div class="col-lg-3 col-md-6  col-sm-12 mt-3 " *ngFor="let item of products | paginate: {      
       itemsPerPage: count,
       currentPage: page,
       totalItems: total }; let i=index">
         <!-- <span class="float-end price-hp">{{item.prix}}</span> -->
+        <!-- {{i+1 | json}}        -->
         <div class="card h-60 shadow-sm position-relative">
           <div class="dropdown position-absolute top-0 end-0" style="cursor:pointer;">
-            <button class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+            <button *ngIf="!role &&  authenticate" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
               <i class="fa-sharp fa-solid fa-ellipsis-vertical fs-5"></i>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu"  >
               <li class="dropdown-item"><i class="fa fa-pen" routerLink="/product/edit/{{item.id}}"> Edite </i></li>
               <li class="dropdown-item fa fa-trash" (click)="DeleteProduct(item)"> Delete</li>
             </ul>
           </div>
-          <span (click)="get(item.id)" data-toggle="modal" data-target="#exampleModall">
-            <img src="{{item.photo}}" class="card-img-top  " style="height: 250px; cursor: pointer;"
+          <!-- routerLink="/product/view" [state]="{ data: this.item}" -->
+          <span  routerLink="/product/view" [state]="{ data: this.item}" >
+            <img src="{{item.imageURL}}" class="card-img-top" style="height: 250px; cursor: pointer;"
               alt="{{item.name}}"></span>
           <div class="label-top shadow-sm fs-5 fw-3 mx-auto">{{item.name}}</div>
+          <!-- product modal-->
+          
+              <!-- product modal end-->
           <div class="card-body">
             <div class="w-100 d-flex justify-content-between">
-              <span>Price : {{item.prix | currency}}
-                <span *ngIf="item.ispromotion" class="small text-muted "><i class="small fa-solid fa-rectangle-ad"></i>
+              <span>Price : {{item.price | currency}}
+                <span *ngIf="item.ispromotion" class="small text-muted ">
+                  <i class="small fa-solid fa-rectangle-ad"></i>
                 </span>
               </span>
               <span (click)="favorit(item)">
@@ -63,67 +69,57 @@
             </div>
             <h5 class="card-title"></h5>
             <div class="text-center my-2">
-              <button type="button" (click)="get(item.id)" class="btn btn-sm btn-warning" data-toggle="modal"
-                data-target="#exampleModall"> Check offer </button>
-              <!-- Modal example -->
-              <div class="modal modal-xl" id="exampleModall" tabindex="-1" role="dialog"
+               
+              <button *ngIf="authenticate" type="button" (click)="addtocart(item,i)" class="btn btn-sm btn-warning"
+                > Add To Cart </button>
+             
+               <button *ngIf="!authenticate" type="button"  class="btn btn-sm btn-warning"
+               data-toggle="modal" data-target="#Modal2"> Add To Cart </button>
+              <!-- Modal login -->
+              <div class="modal modal" id="Modal2" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabell" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabell"><strong>Product Information</strong></h5>
+                      <h5 class="modal-title" id="exampleModalLabell"><strong>Information</strong></h5>
                       <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                      </button>
-                    </div>
+                      </button>                     
+                    </div>     
                     <div class="modal-body">
-                      <app-view [data]="p"> </app-view>
-                    </div>
-                    <!-- end offer chec -->
-                    <div class="modal-footer">
+                      <p>Think To Logging Please!</p>
+                    </div>  
+                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Order Now !</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- end Modal -->
-            </div>
+              <!-- end Modal login -->
+            </div>      
             <div class="clearfix mb-1">
               <span class="float-start"><i class="far fa-question-circle"></i></span>
-              <span class="float-end"><i class="fas fa-plus btn" (click)="add(item)"> </i></span>
+              <!-- <span class="float-end"><i class="fas fa-plus btn" (click)="addtocart(item,i);">
+                </i></span> -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="toast">
+    <div class="toast-header">
+      Toast Header
+    </div>
+    <div class="toast-body">
+      Some text inside the toast body
+    </div>
+  </div>
   <!-- Product loading end -->
-  <!-- pagination -->
-  
-  <nav aria-label="Page navigation  " >
+  <nav aria-label="Page navigation  ">
     <ul class="pagination justify-content-center ">
-      <pagination-controls
-      previousLabel="Prev"
-      nextLabel="Next"
-       (pageChange)="page = $event; onpageChange($event)">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event; onpageChange($event)">
 
-    </pagination-controls>
-      <!-- <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      </pagination-controls>
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li> -->
     </ul>
   </nav>

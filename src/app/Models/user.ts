@@ -10,9 +10,4 @@ export interface user{
     
   }
 
-  export interface login{
-    email:string;
-    password:number;
-    role: string;
-
-  }
+ 

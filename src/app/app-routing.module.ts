@@ -7,16 +7,17 @@ import { EditProductComponent } from './Components/edit-product/edit-product.com
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
-
+import { ViewComponent } from './Components/all-products/view/view.component';
 const routes: Routes = [
   {path : "home" ,component:HomeComponent},
-  {path:'product' ,      component:AllProductsComponent },
+  {path:'products' ,      component:AllProductsComponent },
   {path:'add-product' ,      component:AddProductComponent },
   {path:'product/edit/:productID' ,      component:EditProductComponent },
   {path:'signup' ,      component:SignupComponent},
   {path:'login' ,       component:LoginComponent},
-  {path:'cart' ,        component:CartComponent},
-  {path:"**", redirectTo:"home", pathMatch:"full"}
+  {path:'cart' ,        component:CartComponent}, 
+  {path:'product/view', component:ViewComponent},
+  {path:"**", redirectTo:"home", pathMatch:"full"},
 ];
 
 @NgModule({

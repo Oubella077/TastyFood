@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   public signupForm !: FormGroup;
   submitted = false;
   Sucsses = false;
-  constructor(private formbuilder: FormBuilder, public service: ProductService, public router: Router) { }
+  constructor(private formbuilder: FormBuilder, public service: ProductService , public router: Router) { }
   ngOnInit(): void {
     this.signupForm = this.formbuilder.group(
       {
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
     if(this.signupForm.invalid) {
       return
     }
-      this.service.CreateUser(this.signupForm.value).subscribe({
+      this.service.CreateUser().subscribe({
       next: (data: user) => {
         this.Sucsses=true;
         this.signupForm.reset();
