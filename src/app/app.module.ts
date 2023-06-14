@@ -29,12 +29,12 @@ function kcFactory(KcSecurity: KeycloakSecurityService) {
   ],
   imports: [ BrowserModule,AppRoutingModule,FormsModule,ReactiveFormsModule,HttpClientModule,NgxPaginationModule  ],
   providers: [ 
-  //   {
-  //   provide: APP_INITIALIZER,
-  //   deps: [KeycloakSecurityService],
-  //   useFactory: kcFactory,
-  //   multi: true
-  // }
+    {
+    provide: APP_INITIALIZER,
+    deps: [KeycloakSecurityService],
+    useFactory: kcFactory,
+    multi: true
+  }
 ],
   exports :[NgxPaginationModule] ,
   bootstrap: [AppComponent]
